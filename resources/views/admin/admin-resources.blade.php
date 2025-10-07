@@ -127,9 +127,9 @@
                       {{ optional($p->created_at)->format('M d, Y') ?: '—' }}
                     </td>
 
-<td class="px-4 py-3 text-slate-700">
-  {{ $p->created_by_name }}
-</td>
+                    <td class="px-4 py-3 text-slate-700">
+                      {{ $p->created_by_name }}
+                    </td>
 
 
 

@@ -134,7 +134,7 @@
         </span>
       </a>
 
-      <!-- ✅ Drug Guide -->
+      <!-- ✅ Drug Guide 
       <a href="{{ $r('faculty.drug_guide.index', '/faculty/drug-guide') }}"
         class="{{ $active === 'drug_guide' ? $activeLink : $inactiveLink }}"
         aria-current="{{ $active === 'drug_guide' ? 'page' : 'false' }}">
@@ -144,7 +144,7 @@
         </span>
       </a>
 
-      <!-- ✅ Diseases Library -->
+      <!-- ✅ Diseases Library 
       <a href="{{ $r('faculty.diseases.index', '/faculty/diseases') }}"
         class="{{ $active === 'diseases' ? $activeLink : $inactiveLink }}"
         aria-current="{{ $active === 'diseases' ? 'page' : 'false' }}">
@@ -153,8 +153,9 @@
             class="h-5 w-5 {{ $active === 'diseases' ? 'text-white' : 'text-gray-500' }}"></i>
           <span class="text-[14px]">Diseases</span>
         </span>
-      </a>
-      <!-- Simulation Assist -->
+      </a> 
+      -->
+      <!-- Simulation Assist 
       <a href="{{ $r('faculty.simulation.index', '/faculty/simulation-assist') }}"
         class="{{ $active === 'simulation' ? $activeLink : $inactiveLink }}"
         aria-current="{{ $active === 'simulation' ? 'page' : 'false' }}">
@@ -162,7 +163,7 @@
           <i data-lucide="activity" class="h-5 w-5 {{ $active === 'simulation' ? 'text-white' : 'text-gray-500' }}"></i>
           <span class="text-[14px]">Simulation Assist</span>
         </span>
-      </a>
+      </a> -->
       <!-- Chartings -->
       <a href="{{ $r('faculty.chartings.index', '/faculty/chartings') }}"
         class="{{ $active === 'chartings' ? $activeLink : $inactiveLink }}"
