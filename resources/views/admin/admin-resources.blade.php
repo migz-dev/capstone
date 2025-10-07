@@ -22,7 +22,6 @@
     {{-- Sidebar --}}
     @include('partials.admin-sidebar', ['active' => 'resources'])
 
-    {{-- Main --}}
     <section class="flex-1 min-w-0">
       {{-- Header --}}
       <header class="sticky top-0 z-30 bg-white/80 backdrop-blur border-b border-slate-200">
@@ -38,7 +37,6 @@
             </div>
           </div>
 
-          {{-- Primary action (now a link to the create page) --}}
           <div class="flex items-center gap-2">
             <a href="{{ route('admin.procedures.create') }}"
               class="inline-flex items-center gap-2 rounded-xl bg-green-600 text-white px-3 py-2 text-[13px] font-medium shadow hover:bg-green-700 active:scale-[.99]">
@@ -49,16 +47,15 @@
         </div>
       </header>
 
-      {{-- Content --}}
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
 
         {{-- Flash --}}
-        @if(session('ok'))
+        @if (session('ok'))
           <div class="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
             {{ session('ok') }}
           </div>
         @endif
-        @if($errors->any())
+        @if ($errors->any())
           <div class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
             {{ $errors->first() }}
           </div>
@@ -103,14 +100,14 @@
               </thead>
 
               <tbody class="divide-y divide-slate-200">
-                @forelse($procedures as $p)
+                @forelse ($procedures as $p)
                   <tr class="hover:bg-slate-50">
                     <td class="px-4 py-3 font-medium text-slate-900">
                       {{ $p->title ?: '—' }}
                     </td>
 
                     <td class="px-4 py-3">
-                      @if($p->status === 'published')
+                      @if ($p->status === 'published')
                         <span
                           class="inline-flex items-center gap-1.5 rounded-lg bg-green-50 text-green-700 px-2 py-1 text-[12px] font-medium">
                           <i data-lucide="check-circle" class="h-3.5 w-3.5"></i> Published
@@ -127,11 +124,16 @@
                       {{ optional($p->created_at)->format('M d, Y') ?: '—' }}
                     </td>
 
+                    {{-- CREATED BY (Admin or CI) --}}
                     <td class="px-4 py-3 text-slate-700">
-                      {{ $p->created_by_name }}
+                      @if ($p->created_by_admin)
+                        {{ optional($p->adminCreator)->full_name ?? '—' }}
+                      @elseif ($p->created_by)
+                        {{ optional($p->author)->full_name ?? '—' }}
+                      @else
+                        —
+                      @endif
                     </td>
-
-
 
 
                     <td class="px-4 py-3">
@@ -150,7 +152,7 @@
                           <i data-lucide="pencil" class="h-4 w-4"></i>
                         </a>
 
-                        {{-- Delete (kept inline) --}}
+                        {{-- Delete --}}
                         <form method="POST" action="{{ route('admin.procedures.destroy', $p) }}"
                           onsubmit="return confirm('Delete this procedure permanently? This cannot be undone.');">
                           @csrf @method('DELETE')
@@ -165,17 +167,15 @@
                   </tr>
                 @empty
                   <tr>
-                    <td colspan="5" class="px-4 py-8 text-center text-slate-500">
-                      No procedures found.
-                    </td>
+                    <td colspan="5" class="px-4 py-8 text-center text-slate-500">No procedures found.</td>
                   </tr>
                 @endforelse
               </tbody>
             </table>
           </div>
 
-          {{-- Footer / Pagination (matches admin-users design) --}}
-          @if($procedures instanceof \Illuminate\Contracts\Pagination\Paginator)
+          {{-- Pagination --}}
+          @if ($procedures instanceof \Illuminate\Contracts\Pagination\Paginator)
             @php
               $cur = $procedures->currentPage();
               $last = max(1, $procedures->lastPage());
@@ -188,7 +188,6 @@
 
             <div class="flex items-center justify-end px-4 py-3 border-t border-slate-200 bg-slate-50">
               <nav class="flex items-center gap-1">
-                {{-- Prev --}}
                 @if ($procedures->onFirstPage())
                   <button
                     class="h-9 w-9 inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white opacity-50 cursor-not-allowed">
@@ -201,7 +200,6 @@
                   </a>
                 @endif
 
-                {{-- Numbered buttons --}}
                 @for ($i = $from; $i <= $to; $i++)
                   @if ($i === $cur)
                     <span
@@ -214,7 +212,6 @@
                   @endif
                 @endfor
 
-                {{-- Next --}}
                 @if ($cur >= $last)
                   <button
                     class="h-9 w-9 inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white opacity-50 cursor-not-allowed">
@@ -229,16 +226,13 @@
               </nav>
             </div>
           @endif
-
         </div>
       </div>
     </section>
   </main>
 
-  {{-- Shared footer --}}
   @include('partials.admin-footer')
 
-  {{-- Icons --}}
   <script src="https://unpkg.com/lucide@latest"></script>
   <script> lucide.createIcons(); </script>
 </body>

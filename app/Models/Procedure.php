@@ -113,14 +113,23 @@ class Procedure extends Model
             ?? '—';
     }
 
-    public function getUpdatedByNameAttribute(): string
-    {
-        // Prefer explicit admin column, then legacy admin-in-updated_by, then faculty
-        return $this->adminEditor?->name
-            ?? $this->adminEditorLegacy?->name
-            ?? $this->editorFaculty?->name
-            ?? '—';
-    }
+public function getUpdatedByNameAttribute(): string
+{
+    // Preferred: explicit admin editor
+    $name =
+        ($this->updaterAdmin?->full_name ?? $this->updaterAdmin?->name)
+        // Legacy: admin id stored in updated_by
+        ?? ($this->editorAdminLegacy?->full_name ?? $this->editorAdminLegacy?->name)
+        // CI editor
+        ?? ($this->editorFaculty?->full_name ?? $this->editorFaculty?->name);
+
+    // If still empty, fall back to creator so you don’t see a dash
+    return $name
+        ?? ($this->creatorAdmin?->full_name ?? $this->creatorAdmin?->name
+            ?? $this->adminAuthor?->full_name ?? $this->adminAuthor?->name
+            ?? $this->author?->full_name ?? $this->author?->name
+            ?? '—');
+}
 
     public function getIsPublishedAttribute(): bool
     {
