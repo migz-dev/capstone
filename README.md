@@ -1,9 +1,4 @@
 
-<p align="center">
-  <a href="#" target="_blank">
-    <img src="public/CON_LOGO.png" width="160" alt="NurSync Logo">
-  </a>
-</p>
 
 <h1 align="center">NurSync NAS — Nurse Assistance System</h1>
 
@@ -32,16 +27,5 @@ NurSync integrates academic scheduling, registration validation, chartings, RLE 
 - 👩‍💻 **Assist Student Nurses** with accessible references, simulation guides, and activity tracking.
 - 🏫 **Support Admins** with faculty approval, duty scheduling, and content oversight.
 - 🔔 **Automate notifications and term-based validation** (academic year & semester system).
-
----
-
-## 🧩 Core Features
-
-| Role | Core Functions |
-|------|----------------|
-| **Admin** | User & faculty management, duty/return demo oversight, system monitoring |
-| **Faculty / Clinical Instructor** | Chartings (Nurse’s Notes, Vitals, MAR, etc.), Return Demo library, Disease & Drug Guide |
-| **Student Nurse (View Only)** | Access approved materials, procedures, and simulation guides |
-| **Shared** | Secure authentication, profile management, notifications, and audit logging |
 
 ---
