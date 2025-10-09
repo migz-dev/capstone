@@ -14,7 +14,6 @@
   <meta charset="utf-8">
   <link rel="icon" type="image/x-icon" href="{{ asset('CON_LOGO.ico') }}">
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('CON_LOGO.ico') }}">
-
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>@yield('title', 'NurSync')</title>
 
